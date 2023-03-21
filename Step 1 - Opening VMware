@@ -1,0 +1,33 @@
+import psutil
+import subprocess
+import time
+import pyautogui
+
+# Check if VMware is already running
+vmware_running = False
+for proc in psutil.process_iter():
+    if proc.name() == 'vmware.exe':
+        vmware_running = True
+
+        # move the mouse to "play button location"
+
+        pyautogui.moveTo(344, 63)
+
+        # click the mouse to "play button location"
+
+        pyautogui.click()
+
+        break
+
+if not vmware_running:
+    # VMware is not running, open the application
+    subprocess.Popen(r"C:\Program Files (x86)\VMware\VMware Workstation\vmware.exe")
+    time.sleep(10)
+
+#move the mouse to "play button location"
+
+pyautogui.moveTo(344, 63)
+
+#click the mouse to "play button location"
+
+pyautogui.click()
