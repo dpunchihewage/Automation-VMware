@@ -3,31 +3,27 @@ import subprocess
 import time
 import pyautogui
 
-# Check if VMware is already running
-vmware_running = False
-for proc in psutil.process_iter():
-    if proc.name() == 'vmware.exe':
-        vmware_running = True
+def run_vmware():
+    """Checks if VMware is running, and if not, opens the application and waits for it to load.
+    Then, moves the mouse to the "play button" location and clicks it."""
+    vmware_running = False
+    for proc in psutil.process_iter():
+        if proc.name() == 'vmware.exe':
+            vmware_running = True
+            break
 
-        # move the mouse to "play button location"
+    if not vmware_running:
+        subprocess.Popen(r"C:\Program Files (x86)\VMware\VMware Workstation\vmware.exe")
+        time.sleep(10)
 
-        pyautogui.moveTo(344, 63)
+    pyautogui.moveTo(344, 63)
+    pyautogui.click()
 
-        # click the mouse to "play button location"
+def main():
+    """Runs the main activities of the script."""
+    run_vmware()
+    
+# the statement below is used to check if the current file is being executed as the main program or if it is being imported as a module into another program. If it is being executed as the main program, the main() function will be called. If it is being imported as a module into another program, the main() function will not be executed automatically.
 
-        pyautogui.click()
-
-        break
-
-if not vmware_running:
-    # VMware is not running, open the application
-    subprocess.Popen(r"C:\Program Files (x86)\VMware\VMware Workstation\vmware.exe")
-    time.sleep(10)
-
-#move the mouse to "play button location"
-
-pyautogui.moveTo(344, 63)
-
-#click the mouse to "play button location"
-
-pyautogui.click()
+if __name__ == '__main__':
+    main()
